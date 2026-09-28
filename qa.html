@@ -51,7 +51,7 @@ if (user.username) {
   document.getElementById("nav-logout").style.display = "inline";
   if (user.isAdmin) document.getElementById("nav-admin").style.display = "inline";
 } else {
-  badge.innerHTML = '<a href="login.html">Log in</a>';
+  badge.innerHTML = '<a href="login.html" class="btn login-btn">Log in</a>';
 }
 
 function handleAsk() {
