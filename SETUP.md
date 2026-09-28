@@ -1,4 +1,4 @@
-# Party Games Week Website - Setup Guide
+# Paris Games Week Website - Setup Guide
 
 ## 1. Add your logos
 These logos are already in the `images` folder (replace the files to swap them):
@@ -11,7 +11,7 @@ These logos are already in the `images` folder (replace the files to swap them):
 ## 2. Create a Firebase project
 Same steps as before:
 1. Go to https://console.firebase.google.com and click "Add project"
-2. Name it something like "PGW" or "PartyGamesWeek"
+2. Name it something like "PGW" or "ParisGamesWeek"
 3. Enable Firestore Database (Standard edition, production mode)
 4. Go to Project Settings > General > scroll to "Your apps" > click the web icon </> to register a new web app
 5. Copy the firebaseConfig values shown and paste them into js/firebase-config.js (replacing the placeholder values)
