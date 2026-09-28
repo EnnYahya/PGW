@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin - Party Games Week</title>
+<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+  <img src="images/logo-ailco.png" alt="EILCO logo">
+  <h1>Party Games Week - Admin</h1>
+  <img src="images/logo-stugamers.png" alt="Ch'tis Gamers logo">
+  <img src="images/logo-pgw.png" alt="PGW logo">
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="qa.html">Questions</a>
+  <a href="admin.html">Admin</a>
+  <a href="#" onclick="logout()">Log out</a>
+</nav>
+
+<main>
+  <section>
+    <h2>Edit: About Party Games Week</h2>
+    <textarea id="info-edit"></textarea>
+    <button class="btn" onclick="saveField('info')">Save Info</button>
+  </section>
+
+  <section>
+    <h2>Edit: Rules & What to Bring</h2>
+    <textarea id="rules-edit"></textarea>
+    <button class="btn" onclick="saveField('rules')">Save Rules</button>
+  </section>
+
+  <section>
+    <h2>All Questions (Admin view)</h2>
+    <p>Reply to a question and everyone will see your answer as "Admin."</p>
+    <div id="questions-list"></div>
+  </section>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/qa.js"></script>
+<script src="js/content.js"></script>
+<script>
+requireAdmin();
+
+db.collection("site_content").doc("main").get().then(doc => {
+  const data = doc.exists ? doc.data() : {};
+  document.getElementById("info-edit").value = data.info || "";
+  document.getElementById("rules-edit").value = data.rules || "";
+});
+
+function saveField(fieldId) {
+  const text = document.getElementById(fieldId + "-edit").value;
+  saveContent(fieldId, text);
+  alert("Saved!");
+}
+
+renderQuestions(document.getElementById("questions-list"), true);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /questions/{questionId} {
+      allow read: if true;
+      allow create: if request.resource.data.username is string
+                    && request.resource.data.question is string;
+      allow update, delete: if true; // simple version: anyone can technically hit this,
+      // but the site UI only shows edit/delete controls to admins.
+      // For real protection, ask Claude to add a proper admin check later.
+    }
+
+    match /site_content/{docId} {
+      allow read: if true;
+      allow write: if true; // same note as above - UI-only protection for now
+    }
+  }
+}

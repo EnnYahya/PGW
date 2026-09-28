@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Party Games Week</title>
+<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600&family=Nunito&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+  <img src="images/logo-ailco.png" alt="EILCO logo">
+  <h1>Party Games Week</h1>
+  <img src="images/logo-stugamers.png" alt="Ch'tis Gamers logo">
+  <img src="images/logo-pgw.png" alt="PGW logo">
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="qa.html">Questions</a>
+  <a id="nav-admin" href="admin.html" style="display:none;">Admin</a>
+  <a id="nav-logout" href="#" onclick="logout()" style="display:none;">Log out</a>
+</nav>
+
+<div class="user-badge" id="user-badge"></div>
+
+<main>
+  <section>
+    <h2>About Party Games Week</h2>
+    <p class="content-box" id="info-content">Loading...</p>
+  </section>
+
+  <section>
+    <h2>Rules & What to Bring</h2>
+    <p class="content-box" id="rules-content">Loading...</p>
+  </section>
+
+  <section style="text-align:center;">
+    <h2>Sign Up</h2>
+    <p>Ready to join Party Games Week? Fill out the form below.</p>
+    <!-- Paste your Google Form link in the href below -->
+    <a class="btn" href="PASTE_YOUR_GOOGLE_FORM_LINK_HERE" target="_blank">Sign Up Form</a>
+  </section>
+
+  <section style="text-align:center;">
+    <h2>Photos</h2>
+    <p>See and share photos from Party Games Week!</p>
+    <!-- Paste your straw.page link in the href below -->
+    <a class="btn btn-secondary" href="PASTE_YOUR_STRAWPAGE_LINK_HERE" target="_blank">View Photos</a>
+  </section>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/content.js"></script>
+<script>
+const user = getCurrentUser();
+const badge = document.getElementById("user-badge");
+if (user.username) {
+  badge.innerText = "Logged in as: " + (user.isAdmin ? "Admin" : user.username);
+  document.getElementById("nav-logout").style.display = "inline";
+  if (user.isAdmin) document.getElementById("nav-admin").style.display = "inline";
+} else {
+  badge.innerHTML = '<a href="login.html">Log in</a>';
+}
+
+loadContent("info", document.getElementById("info-content"));
+loadContent("rules", document.getElementById("rules-content"));
+</script>
+
+</body>
+</html>
